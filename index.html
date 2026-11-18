@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Side-Event Economy Field Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: the Barcelona hall is the hero and stays on screen with its panel; everything below is a narrow reading column. Single theme, matching the existing Working Notes site. */
+  --bg: #013951;
+  --bg-deep: #012a3d;
+  --panel: #0a2f44;
+  --nav: #111111;
+  --ink: #f9f9f9;
+  --muted: #a8c2cf;
+  --line: rgba(255, 255, 255, 0.16);
+  --orange: #ef7d00;
+  --orange-ink: #1e3043;
+  --display: "Cinzel", "Times New Roman", serif;
+  --body: "Inter", Arial, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--body); }
+a { color: var(--orange); }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+.read { max-width: 820px; }
+header.nav .wrap { display: flex; flex-wrap: wrap; gap: 4px 20px; align-items: center; justify-content: space-between; min-height: 54px; padding-top: 8px; padding-bottom: 8px; }
+.navright { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 22px; }
+.navlinks { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.navlinks a { font: 600 12px/1 var(--body); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding: 7px 0; border-bottom: 2px solid transparent; }
+.navlinks a:hover { color: var(--orange); border-bottom-color: var(--orange); }
+header.nav small { border-left: 1px solid var(--line); padding-left: 22px; }
+
+h2 { scroll-margin-top: 76px; }
+
+.hero { background: radial-gradient(120% 90% at 50% 0%, #0d5a7a 0%, var(--bg) 60%); padding: 44px 0 30px; border-bottom: 1px solid var(--line); }
+.hero .wrap { display: flex; flex-direction: column; gap: 14px; }
+.kicker { font: 600 12px/1.3 var(--body); letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange); margin: 0; }
+h1, h2, h3 { font-family: var(--display); font-weight: 900; text-transform: uppercase; letter-spacing: 0.01em; line-height: 1.1; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(28px, 5.6vw, 50px); }
+h2 { font-size: clamp(22px, 3.4vw, 32px); }
+h1 em, h2 em { font-style: normal; color: var(--orange); }
+p { margin: 0; max-width: 68ch; }
+.lede { font-size: 17px; color: var(--muted); }
+sup { color: var(--orange); font-weight: 700; font-size: 0.68em; line-height: 0; margin-left: 1px; }
+sup a { color: inherit; text-decoration: none; }
+sup a:hover { text-decoration: underline; }
+.notes p { scroll-margin-top: 16px; }
+.notes p:target { color: var(--ink); }
+.notes b { color: var(--orange); }
+.legend { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; font-size: 13px; }
+.legend li { border: 1px solid var(--line); padding: 3px 10px; color: var(--muted); }
+.legend b { color: var(--orange); }
+
+main { display: flex; flex-direction: column; gap: 44px; padding: 36px 0 72px; }
+main > section.wrap + section.wrap { border-top: 2px solid var(--orange); padding-top: 56px; }
+section { display: flex; flex-direction: column; gap: 16px; }
+
+/* Walk */
+.chips { display: flex; flex-wrap: wrap; gap: 10px 22px; }
+.chipgroup { display: flex; flex-direction: column; gap: 6px; }
+.chipgroup small { font: 600 11px/1 var(--body); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.chipgroup div { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { background: transparent; border: 1px solid var(--orange); padding: 9px 12px; font-size: 14px; font-weight: 600; cursor: pointer; }
+.chip:hover { background: rgba(239, 125, 0, 0.15); }
+.chip[aria-pressed="true"] { background: var(--orange); border-color: var(--orange); color: var(--orange-ink); }
+
+.stagebox { background: var(--panel); border-top: 3px solid var(--orange); display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: start; }
+.mapwrap { background: var(--bg-deep); border-right: 1px solid var(--line); }
+#hall { display: block; width: 100%; height: auto; }
+#hall text { font-family: var(--body); }
+#hall .outline { fill: none; stroke: rgba(255, 255, 255, 0.45); stroke-width: 2; }
+#hall .zl { fill: var(--ink); font-size: 22px; font-weight: 700; letter-spacing: 0.06em; }
+#hall .zm { fill: var(--muted); font-size: 15px; font-weight: 600; text-anchor: middle; }
+#hall .zonebox { fill: rgba(255, 255, 255, 0.06); stroke: rgba(255, 255, 255, 0.28); }
+#hall .cell { fill: rgba(255, 255, 255, 0.12); transition: fill 0.4s; }
+#hall .cell.m { fill: rgba(207, 224, 232, 0.3); }
+#hall:not([data-step="1"]) .cell.s { fill: var(--orange); }
+#hall[data-step="0"] .cell.s { fill: rgba(239, 125, 0, 0.45); }
+#hall .wallbox { transition: fill 0.4s, stroke 0.4s; }
+#hall[data-step="4"] .wallbox { fill: rgba(239, 125, 0, 0.4); stroke: var(--orange); }
+#hall .route { fill: none; stroke: var(--orange); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 0.9s ease; }
+#hall .route.on { stroke-dashoffset: 0; }
+#hall .inset, #hall .walltix { opacity: 0; transition: opacity 0.4s; }
+#hall[data-step="3"] .inset, #hall[data-step="4"] .inset, #hall[data-step="4"] .walltix { opacity: 1; }
+#hall .overview { opacity: 0; transition: opacity 0.4s; pointer-events: none; }
+#hall[data-step="0"] .overview { opacity: 1; }
+#hall .ovk { fill: var(--muted); font-size: 12px; font-weight: 600; }
+#hall .ovl { fill: var(--ink); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; }
+#hall .insetbox { fill: var(--bg-deep); stroke: var(--orange); stroke-width: 2; }
+#hall .zoom { stroke: var(--orange); stroke-width: 1.5; stroke-dasharray: 5 5; fill: none; }
+#hall .seat { fill: none; stroke: var(--orange); stroke-width: 3; transition: fill 0.25s; }
+#hall .seat.on { fill: var(--orange); }
+#hall .insetlbl { fill: var(--muted); font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-anchor: middle; }
+#hall .walltix { fill: var(--orange); font-size: 16px; font-weight: 700; text-anchor: middle; }
+#hall .mk, #hall .hot { cursor: pointer; }
+#hall .mk circle { fill: var(--nav); stroke: var(--orange); stroke-width: 3; transition: fill 0.3s; }
+#hall .mk text { fill: var(--orange); font-size: 20px; font-weight: 700; text-anchor: middle; }
+#hall .mk.done circle, #hall .mk.now circle { fill: var(--orange); }
+#hall .mk.done text, #hall .mk.now text { fill: var(--orange-ink); }
+#hall .mk.now circle { stroke: #fff; }
+#hall .hot { fill: transparent; }
+#hall .mk circle.hit { fill: transparent; stroke: none; }
+.tip { position: fixed; z-index: 50; max-width: 320px; background: #0b1a26; color: var(--ink); border: 1px solid rgba(255, 255, 255, 0.25); border-top: 3px solid var(--orange); padding: 10px 12px; font: 13px/1.5 var(--body); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45); pointer-events: none; }
+.tip[hidden] { display: none; }
+[data-tip] { cursor: help; }
+button[data-tip], #hall .mk[data-tip], #hall .hot.go { cursor: pointer; }
+#hall .inset { pointer-events: none; }
+#hall[data-step="3"] .inset, #hall[data-step="4"] .inset { pointer-events: auto; }
+.mapnote { margin: 0; padding: 8px 14px; font-size: 13px; color: var(--muted); max-width: none; min-height: 36px; }
+
+.body { display: grid; grid-template-columns: 140px minmax(0, 1fr); }
+.tabs { display: flex; flex-direction: column; gap: 8px; padding: 14px; border-right: 1px solid var(--line); }
+.tab { flex: 1; background: transparent; border: 1px solid var(--orange); padding: 14px 12px; cursor: pointer; font: 600 13px/1.2 var(--body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-align: left; }
+.tab:hover { background: rgba(239, 125, 0, 0.15); }
+.tab b { color: var(--orange); margin-right: 10px; }
+.tab[aria-pressed="true"] { background: var(--orange); color: var(--orange-ink); }
+.tab[aria-pressed="true"] b { color: var(--orange-ink); }
+
+.panel { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; padding: 20px; align-content: start; }
+.panel .say { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.panel h3 { font-size: 22px; }
+.panel h3 small { display: block; font: 600 12px/1.4 var(--body); letter-spacing: 0.1em; color: var(--orange); margin-bottom: 4px; }
+.gap { border-left: 3px solid var(--orange); padding-left: 12px; font-size: 15px; }
+.tag { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange); }
+.btn { background: var(--orange); color: var(--orange-ink); border: 0; padding: 12px 18px; font: 600 13px/1 var(--body); letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; margin-top: auto; }
+.viz { background: var(--bg-deep); border: 1px solid var(--line); padding: 16px; display: flex; flex-direction: column; gap: 10px; justify-content: center; }
+.viz .big { font: 900 clamp(40px, 7vw, 58px)/1 var(--display); color: var(--orange); }
+.viz .unit { color: var(--muted); font-size: 14px; }
+.viz .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 14px; }
+.badge { font: 700 11px/1 var(--body); letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 8px; background: rgba(207, 224, 232, 0.18); color: #cfe0e8; }
+.badge.comp { background: var(--orange); color: var(--orange-ink); }
+.pips { display: flex; flex-wrap: wrap; gap: 6px; }
+.pips i { display: flex; gap: 2px; padding: 4px; border: 1px solid var(--orange); }
+.pips i b { width: 12px; height: 26px; background: var(--orange); }
+.dots { display: flex; gap: 5px; }
+.dots i { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--orange); }
+.dots i.on { background: var(--orange); }
+.ovrow { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; align-items: center; font-size: 14px; padding: 6px 0; border-top: 1px solid var(--line); }
+.ovrow:first-child { border-top: 0; padding-top: 0; }
+.ovrow .who { grid-column: 1 / -1; }
+.ovrow .who small { color: var(--muted); margin-left: 6px; }
+.ovrow .n { font: 900 24px/1 var(--display); color: var(--orange); text-align: right; }
+.scale { display: block; width: 100%; height: auto; }
+.scale text { font-family: var(--body); font-size: 11px; fill: var(--muted); }
+.scale .pin { fill: var(--ink); font-weight: 700; font-size: 12px; }
+@media (max-width: 1040px) {
+  .stagebox { grid-template-columns: minmax(0, 1fr); }
+  .mapwrap { border-right: 0; border-bottom: 1px solid var(--line); }
+  .panel { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px 32px; }
+}
+@media (max-width: 760px) {
+  .body { grid-template-columns: minmax(0, 1fr); }
+  .panel { grid-template-columns: minmax(0, 1fr); }
+  .tabs { flex-direction: row; border-right: 0; border-bottom: 1px solid var(--line); }
+  .tab { text-align: center; padding: 13px 4px; font-size: 11px; letter-spacing: 0.04em; }
+  .tab:hover { background: rgba(239, 125, 0, 0.15); }
+  .tab b { display: block; margin: 0 0 3px; }
+  .panel { grid-template-columns: minmax(0, 1fr); padding: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #hall .route, #hall .cell, #hall .seat, #hall .inset, #hall .overview, #hall .walltix, #hall .wallbox { transition: none; }
+}
+
+/* Pod rows */
+.pods { margin: 0; background: var(--panel); border-top: 3px solid var(--orange); padding: 16px 18px; }
+.group { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); padding: 14px 0 4px; }
+.group:first-child { padding-top: 0; }
+.pod { display: grid; grid-template-columns: minmax(0, 1fr) auto 150px; align-items: center; gap: 6px 18px; padding: 10px 0; border-top: 1px solid var(--line); }
+.pod .fmt b { display: block; font-weight: 600; }
+.pod .fmt small { color: var(--muted); font-size: 13px; }
+.pod .num { font-variant-numeric: tabular-nums; text-align: right; font-size: 13px; color: var(--muted); }
+.pod .num b { display: block; color: var(--ink); font-size: 20px; line-height: 1.1; }
+.pod .num b span { font-size: 12px; font-weight: 600; color: var(--muted); }
+.key { display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: center; font-size: 13px; color: var(--muted); padding-bottom: 12px; margin-bottom: 4px; border-bottom: 1px solid var(--line); }
+.key span { display: inline-flex; align-items: center; gap: 6px; }
+.key i { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--orange); display: inline-block; }
+.key i.on { background: var(--orange); }
+.key b { color: var(--ink); }
+figcaption { color: var(--muted); font-size: 13px; padding-top: 10px; }
+@media (max-width: 520px) {
+  .pod { grid-template-columns: 1fr auto; }
+  .pod .fmt { grid-column: 1 / -1; }
+}
+
+/* Routes to a Plated Legend */
+.routes { margin: 0; background: var(--panel); border-top: 3px solid var(--orange); padding: 16px 18px; display: flex; flex-direction: column; gap: 9px; }
+.routes .key i { border: 0; }
+.routes .key i.best { background: var(--orange); }
+.routes .key i.avg { background: var(--ink); }
+.row { display: grid; grid-template-columns: 130px minmax(0, 1fr) 112px; gap: 4px 14px; align-items: center; font-size: 14px; }
+.row .track { height: 20px; position: relative; }
+.row .track::before { content: ""; position: absolute; left: 0; right: 0; top: 9px; height: 2px; background: rgba(255, 255, 255, 0.1); }
+.row .track i { position: absolute; top: 9px; height: 2px; background: rgba(255, 255, 255, 0.35); }
+.row .track i::before, .row .track i::after { content: ""; position: absolute; top: -5px; width: 12px; height: 12px; border-radius: 50%; }
+.row .track i::before { left: -6px; background: var(--orange); }
+.row .track i::after { right: -6px; background: var(--ink); }
+.row .val { font-size: 13px; color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.row .val b { color: var(--ink); font-size: 15px; }
+.axis { display: grid; grid-template-columns: 130px minmax(0, 1fr) 112px; gap: 14px; font-size: 11px; color: var(--muted); }
+.axis div { position: relative; height: 15px; }
+.axis span { position: absolute; transform: translateX(-50%); }
+@media (max-width: 520px) {
+  .row { grid-template-columns: minmax(0, 1fr); }
+  .row .val { text-align: left; }
+  .axis { display: none; }
+}
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px 48px; align-items: start; }
+.col { display: flex; flex-direction: column; gap: 16px; }
+@media (max-width: 1040px) { .two { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
+ul.plain, ol.plain { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; max-width: 68ch; }
+.reading { border-left: 0; padding-left: 0; }
+.questions li::marker { color: var(--orange); font-weight: 700; }
+.notes { border-top: 1px solid var(--line); padding-top: 18px; color: var(--muted); font-size: 13px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+footer { background: var(--nav); padding: 22px 0; font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+<header class="nav"><div class="wrap"><b>Premier Play <span>/</span> Field Notes</b><div class="navright"><nav class="navlinks"><a href="#journey">Journey</a><a href="#changed">What changed</a><a href="#watch">What I'd watch</a><a href="#wondering">Questions</a><a href="#sources">Sources</a></nav><small>Danielle Beram</small></div></div></header>
+
+<div class="hero"><div class="wrap">
+  <p class="kicker">How a prize wall ticket moves through a Riftbound weekend</p>
+  <h1>How I'm approaching <em> the side event economy</em></h1>
+  <p class="lede" style="font-size:20px;color:var(--ink);max-width:100ch">I haven't supported a Riftbound Event! So, to learn how the side-event economy is built, I researched as much as I could about the published schedules, payout tables, and prize wall lists. I focused my case study on the public data from Barcelona, Los Angeles, and Stuttgart, and on limited play specifically, the drafts and sealed events, because those run at all three in a form you can compare side by side. This page shows what changed between them and what I’d look out for in Madrid and Philadelphia.<sup>
+  <p class="lede" style="font-size:14px">All sources are linked at the <a href="#sources">bottom of the page</a>!</p>
+</div></div>
+
+<main>
+  <section class="wrap">
+    <h2 id="journey">I wanted to follow one ticket's <em>journey</em></h2>
+    <p class="lede">Click an event to follow the ticket journey.</p>
+
+    <div class="chips" id="chips" role="group" aria-label="Choose an event"></div>
+
+    <div class="stagebox">
+      <div class="mapwrap">
+        <svg id="hall" viewBox="0 36 1000 606" data-step="0" role="img" aria-label="Event hall redrawn from the Barcelona 2026 floor plan, with four numbered stops: entry, table, payout, and prize wall."></svg>
+        <p class="mapnote" id="mapnote">Hall recreated from the Barcelona 2026 floor plan (huge thanks to @TCJeeves on Youtube for documenting the layout!). But I moved a few areas, like the prize wall and stream stage, so the ticket’s journey is easier to follow.</p>
+      </div>
+      <div class="body">
+      <div class="tabs" role="group" aria-label="Stops">
+        <button class="tab" type="button" data-s="1"><b>1</b>Entry</button>
+        <button class="tab" type="button" data-s="2"><b>2</b>Table</button>
+        <button class="tab" type="button" data-s="3"><b>3</b>Payout</button>
+        <button class="tab" type="button" data-s="4"><b>4</b>Wall</button>
+      </div>
+      <div class="panel" aria-live="polite">
+        <div class="say">
+          <h3><small id="p-ev"></small><span id="p-title"></span></h3>
+          <p id="p-text"></p>
+          <p class="gap"><span class="tag">What I'm wondering..</span><span id="p-gap"></span></p>
+          <button class="btn" type="button" id="next"></button>
+        </div>
+        <div class="viz" id="p-viz"></div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="two">
+    <div class="col">
+    <h2 id="changed">What Stuttgart <em>changed</em></h2>
+    <p>At Barcelona and Los Angeles, every draft and sealed entrant left with tickets, but nobody left with enough for a Plated Legend. Stuttgart kept those casual events, paid them better, and added two &euro;75 Challenges on top.</p>
+
+    <figure class="pods">
+      <div class="key"><span><i class="on"></i>Player earns tickets</span><span><i></i>Player earns nothing</span><span>Each row is one pod of 8 players</span></div>
+      <div class="group">Barcelona and Los Angeles</div>
+      <div class="pod"><div class="fmt"><b>Draft</b><small>&euro;25 / $25, pays 4 / 3 / 2 / 1</small></div><div class="dots" aria-label="8 of 8 players earn tickets"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div><div class="num"><b>20<sup><a href="#n1">1</a></sup> <span>tickets per pod</span></b>100% earn 1+ tickets<sup><a href="#n2">2</a></sup></div></div>
+      <div class="pod"><div class="fmt"><b>Sealed</b><small>&euro;50 / $50, pays 8 / 6 / 4 / 2</small></div><div class="dots" aria-label="8 of 8 players earn tickets"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div><div class="num"><b>40<sup><a href="#n1">1</a></sup> <span>tickets per pod</span></b>100% earn 1+ tickets<sup><a href="#n2">2</a></sup></div></div>
+      <div class="group">Stuttgart, casual</div>
+      <div class="pod"><div class="fmt"><b>On-demand draft</b><small>&euro;25, pays 3 / 2 / 1 / 0, starts every 20 minutes</small></div><div class="dots" aria-label="7 of 8 players earn tickets"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div><div class="num"><b>12<sup><a href="#n1">1</a></sup> <span>tickets per pod</span></b>87% earn 1+ tickets<sup><a href="#n2">2</a></sup></div></div>
+      <div class="pod"><div class="fmt"><b>Sealed Deck</b><small>&euro;50, pays 10 / 8 / 6 / 4 / 2</small></div><div class="dots" aria-label="8 of 8 players earn tickets"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div><div class="num"><b>48<sup><a href="#n1">1</a></sup> <span>tickets per pod</span></b>100% earn 1+ tickets<sup><a href="#n2">2</a></sup></div></div>
+      <div class="pod"><div class="fmt"><b>5 Pack Chaos Draft</b><small>&euro;50, pays 13 / 9 / 5 / 1</small></div><div class="dots" aria-label="8 of 8 players earn tickets"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div><div class="num"><b>56<sup><a href="#n1">1</a></sup> <span>tickets per pod</span></b>100% earn 1+ tickets<sup><a href="#n2">2</a></sup></div></div>
+      <div class="group">Stuttgart, competitive</div>
+      <div class="pod"><div class="fmt"><b>Draft Challenge</b><small>&euro;75, pays 40 / 30 / 20 for 6, 5, or 4 wins</small></div><div class="dots" aria-label="About 3 of 8 players earn tickets"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div><div class="num"><b>65<sup><a href="#n1">1</a></sup> <span>tickets per pod</span></b>34% earn 1+ tickets<sup><a href="#n2">2</a></sup></div></div>
+      <div class="pod"><div class="fmt"><b>Sealed Challenge</b><small>&euro;75, pays 40 / 25 / 10 for 5, 4, or 3 wins</small></div><div class="dots" aria-label="4 of 8 players earn tickets"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></div><div class="num"><b>66<sup><a href="#n1">1</a></sup> <span>tickets per pod</span></b>50% earn 1+ tickets<sup><a href="#n2">2</a></sup></div></div>
+    </figure>
+    </div>
+
+    <div class="col">
+    <div class="reading">
+      <h2><em> My reading</em></h2>
+      <p>In limited play, Stuttgart added a way to earn a Plated Legend in a single event, and made the casual events more rewarding at the same time.</p>
+      <ol class="plain" style="margin:10px 0">
+        <li><b>The Challenges</b> take time, and they reward players who keep winning. A perfect record pays exactly 40, which is one Plated Legend.</li>
+        <li><b>The casual events</b> got more generous, not less! Sealed Deck went from 40 tickets per 8 players to 48 at the same &euro;50, and the new Chaos Draft pays 56.<sup><a href="#n1">1</a></sup></li>
+      </ol>
+      <p>So both kinds of player got something. Competitive players got a route that rewards one great run, and fun-petitive players got more for showing up and playing.</p>
+    </div>
+
+    <figure class="routes">
+      <div class="group" style="padding-top:0">Entries it takes one player to reach 40 tickets.<sup><a href="#n1">1</a></sup></div>
+      <div class="group">Barcelona and Los Angeles</div>
+      <div class="row" data-tip="Best record earns 4 tickets an entry, so 10 entries reach 40. An average player earns 2.5, so about 16."><span>Draft</span><div class="track"><i style="left:35.7%;width:21.4%"></i></div><span class="val"><b>10 to 16</b> entries</span></div>
+      <div class="row" data-tip="Best record earns 8 tickets an entry, so 5 entries reach 40. An average player earns 5, so about 8."><span>Sealed</span><div class="track"><i style="left:17.9%;width:10.7%"></i></div><span class="val"><b>5 to 8</b> entries</span></div>
+      <div class="group">Stuttgart, casual</div>
+      <div class="row" data-tip="Best record earns 3 tickets an entry, so 14 entries reach 40. An average player earns 1.5, so about 27."><span>On-demand draft</span><div class="track"><i style="left:50.0%;width:46.4%"></i></div><span class="val"><b>14 to 27</b> entries</span></div>
+      <div class="row" data-tip="Best record earns 10 tickets an entry, so 4 entries reach 40. An average player earns 6, so about 7."><span>Sealed Deck</span><div class="track"><i style="left:14.3%;width:10.7%"></i></div><span class="val"><b>4 to 7</b> entries</span></div>
+      <div class="row" data-tip="Best record earns 13 tickets an entry, so 4 entries reach 40. An average player earns 7, so about 6."><span>Chaos Draft</span><div class="track"><i style="left:14.3%;width:7.1%"></i></div><span class="val"><b>4 to 6</b> entries</span></div>
+      <div class="group">Stuttgart, competitive</div>
+      <div class="row" data-tip="A 6-0 record earns 40 tickets, so one entry reaches the wall. An average player earns 8.1, so about 5 entries."><span>Draft Challenge</span><div class="track"><i style="left:3.6%;width:14.3%"></i></div><span class="val"><b>1 to 5</b> entries</span></div>
+      <div class="row" data-tip="A 5-0 record earns 40 tickets, so one entry reaches the wall. An average player earns 8.3, so about 5 entries."><span>Sealed Challenge</span><div class="track"><i style="left:3.6%;width:14.3%"></i></div><span class="val"><b>1 to 5</b> entries</span></div>
+      <div class="axis"><div></div><div><span style="left:3.6%">1</span><span style="left:7.1%">2</span><span style="left:14.3%">4</span><span style="left:21.4%">6</span><span style="left:28.6%">8</span><span style="left:35.7%">10</span><span style="left:42.9%">12</span><span style="left:50%">14</span><span style="left:57.1%">16</span><span style="left:64.3%">18</span><span style="left:71.4%">20</span><span style="left:78.6%">22</span><span style="left:85.7%">24</span><span style="left:92.9%">26</span><span style="left:100%">28</span></div><div></div></div>      <figcaption>Each bar is how many times one player enters that event to reach 40 tickets. The left end is a player who wins every match. The right end is a player who wins half.</figcaption>
+    </figure>
+
+    <p>The cheapest and fastest event is the longest route. A casual draft costs &euro;25 and starts every 20 minutes, and it takes about 27 of them to reach 40 tickets. IMO, that fits the narrative around fun-petitive and com-petitive! Casual shouldn't be the path to a plated legend, it should be a way to have fun and potentially earn something.<sup><a href="#n1">1</a></sup></p>
+    </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="two">
+    <div class="col">
+    <h2 id="watch">What I'd watch in <em>Madrid and Philadelphia</em></h2>
+    <ul class="plain">
+      <li>Seats filled, event by event.</li>
+      <li>The share of players who leave with no tickets.</li>
+      <li>The share who redeem something at the wall.</li>
+    </ul>
+    <p>Philadelphia opens the week after Madrid. Its formats, fees, and payouts are already set, so what can change that week is on the floor: directions, table assignments, staff briefings, and what players are told about the wall.</p>
+    </div>
+
+    <div class="col">
+    <h2 id="wondering">What I'm <em>wondering!</em></h2>
+    <ol class="plain questions">
+      <li>How many players wanted a seat and didn't get one?</li>
+      <li>How does the floor plan shift as the weekend goes on, and do main event tables get repurposed for side events?</li>
+      <li>How did the actual end times compare with the schedule?</li>
+      <li>Is prize wall stock allotted per day, or can a hot item sell out on Friday?</li>
+      <li>The casual events were capped at 256 seats and the Challenges at 1,024. How are those caps set, and can tables move between the two tiers once the weekend starts?</li>
+      <li>Casual Sealed Deck pays 48 tickets per 8 players and the Draft Challenge pays 65. Which route did more players actually take?</li>
+    </ol>
+    </div>
+    </div>
+    <div class="notes" id="sources">
+      <div class="group">Sources and reasoning</div>      
+      <p id="n1"><b>1</b> My own math, not an official figure. Starting from the published payout tables, I worked out what 8 players earn in total, what one player earns on average, and how many entries it takes to reach 40 tickets. It assumes a clean Swiss spread, where winners play winners, so 8 players over 3 rounds finish 1 at 3-0, 3 at 2-1, 3 at 1-2, and 1 at 0-3, with no draws and nobody dropping out.</p>      <p id="n2"><b>2</b> Also my own math, from the same clean Swiss spread. Out of 8 players, this is how many finish with at least one ticket.</p>
+            <p> Every schedule, payout table, and prize wall list on this page came from the official event pages at <a href="https://riftboundop.com">riftboundop.com</a>.</p>
+            <p>The full research behind this page, every event, payout, prize wall item, and source document: <a href="https://docs.google.com/spreadsheets/d/1Bkl16HozzPr0R5B31gu5v69HXwk96FnMvhdBv96GIHk/edit?usp=sharing">Riftbound Premier Play Master Database, 2026 to 2027</a>.</p>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap">Independent study by Danielle Beram. Not affiliated with or endorsed by Riot Games or UVS Games.</div></footer>
+
+<script>
+(function () {
+  "use strict";
+  var NS = "http://www.w3.org/2000/svg";
+  var $ = function (id) { return document.getElementById(id); };
+  function el(tag, attrs, parent, text) {
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text) n.textContent = text;
+    parent.appendChild(n);
+    return n;
+  }
+
+  // Published formats. per8, earn, and avg are modeled on a full Swiss spread of 8.
+  var F = [
+    { id: "bd", group: "Barcelona and Los Angeles", ev: "Barcelona and Los Angeles", name: "Draft", fee: "€25 / $25", tier: "", extra: "", pays: "4 / 3 / 2 / 1 for 3 wins down to 0", rounds: 3, bo: 3, per8: 20, earn: 100, seats: 8, top: 4, avg: 2.5 },
+    { id: "bs", group: "Barcelona and Los Angeles", ev: "Barcelona and Los Angeles", name: "Sealed", fee: "€50 / $50", tier: "", extra: "", pays: "8 / 6 / 4 / 2 for 3 wins down to 0", rounds: 3, bo: 1, per8: 40, earn: 100, seats: 8, top: 8, avg: 5 },
+    { id: "so", group: "Stuttgart, casual", ev: "Stuttgart", name: "On-demand draft", fee: "€25", tier: "Casual", extra: "Starts every 20 minutes", pays: "3 / 2 / 1 / 0 for 3 wins down to 0", rounds: 3, bo: 1, per8: 12, earn: 87, seats: 7, top: 3, avg: 1.5 },
+    { id: "ss", group: "Stuttgart, casual", ev: "Stuttgart", name: "Sealed Deck", fee: "€50", tier: "Casual", extra: "Published cap: 256", pays: "10 / 8 / 6 / 4 / 2 for 4 wins down to 0", rounds: 4, bo: 1, per8: 48, earn: 100, seats: 8, top: 10, avg: 6 },
+    { id: "sc", group: "Stuttgart, casual", ev: "Stuttgart", name: "Chaos Draft", fee: "€50", tier: "Casual", extra: "Published cap: 256", pays: "13 / 9 / 5 / 1 for 3 wins down to 0", rounds: 3, bo: 0, per8: 56, earn: 100, seats: 8, top: 13, avg: 7 },
+    { id: "dc", group: "Stuttgart, competitive", ev: "Stuttgart", name: "Draft Challenge", fee: "€75", tier: "Competitive", extra: "Published cap: 1,024", pays: "40 / 30 / 20 for 6, 5, or 4 wins", rounds: 6, bo: 3, per8: 65, earn: 34, seats: 3, top: 40, avg: 8.1 },
+    { id: "sx", group: "Stuttgart, competitive", ev: "Stuttgart", name: "Sealed Challenge", fee: "€75", tier: "Competitive", extra: "Published cap: 1,024", pays: "40 / 25 / 10 for 5, 4, or 3 wins", rounds: 5, bo: 3, per8: 66, earn: 50, seats: 4, top: 40, avg: 8.3 }
+  ];
+  var STOPS = [
+    { n: "Entry", t: "A player picks an event from the published schedule. The fee, the format, and a Casual or Competitive label tell them what they're signing up for.", gap: "How many players wanted a seat and didn't get one?" },
+    { n: "Table", t: "The event holds its tables for every round. More rounds and longer matches hold them longer.", gap: "How does the floor plan shift as the weekend goes on? Do main event tables get repurposed for side events?" },
+    { n: "Payout", t: "Tickets are paid by record when the event ends, so the schedule sets when they reach the wall.", gap: "How actual end times compared with the schedule?" },
+    { n: "Wall", t: "Tickets are spent at the prize wall. Stuttgart's list ran from 1 ticket for a pack to 40 for a Plated Legend, one per attendee for the weekend.", gap: "Stock allocation, and how it's spread across three days?" }
+  ];
+  var PRICES = [[1, "pack"], [3, "sleeves"], [5, "set playmat"], [12, "Regional playmat"], [24, "booster box"], [40, "Plated Legend"]];
+  var MATH = {
+    bd: "Three rounds. Of 8 players, one goes 3-0 (4 tickets), three go 2-1 (3 each), three go 1-2 (2 each), and one goes 0-3 (1). Total: 20.",
+    bs: "Three rounds. Of 8 players, one goes 3-0 (8 tickets), three go 2-1 (6 each), three go 1-2 (4 each), and one goes 0-3 (2). Total: 40.",
+    so: "Three rounds. Of 8 players, one goes 3-0 (3 tickets), three go 2-1 (2 each), three go 1-2 (1 each), and one goes 0-3 (0). Total: 12, and 7 of 8 earn.",
+    ss: "Four rounds. Of 16 players, one goes 4-0 (10 tickets), four go 3-1 (8 each), six go 2-2 (6 each), four go 1-3 (4 each), and one goes 0-4 (2). That is 96 per 16, or 48 per 8.",
+    sc: "Three rounds. Of 8 players, one goes 3-0 (13 tickets), three go 2-1 (9 each), three go 1-2 (5 each), and one goes 0-3 (1). Total: 56.",
+    dc: "Six rounds. Of 64 players, one goes 6-0 (40 tickets), six go 5-1 (30 each), and fifteen go 4-2 (20 each). That is 520 per 64, or 65 per 8. 22 of 64 earn, which is 34%.",
+    sx: "Five rounds. Of 32 players, one goes 5-0 (40 tickets), five go 4-1 (25 each), and ten go 3-2 (10 each). That is 265 per 32, or 66 per 8. 16 of 32 earn, which is 50%."
+  };
+  function tip(t) { return ' data-tip="' + String(t).replace(/&/g, "&amp;").replace(/"/g, "&quot;") + '"'; }
+  var OV = { n: "One great run is now enough", t: "At Barcelona and Los Angeles (RCs), the best a limited event paid one player was 8 tickets, so a Plated Legend took at least five perfect runs. Stuttgart (RC) paid its casual events better and added \u20ac75 Challenges where a perfect record pays exactly 40.", gap: "Did more players enter the Challenges once a single run was enough?" };
+  var cur = "dc", step = 0;
+  function fmt() { return F.filter(function (f) { return f.id === cur; })[0]; }
+
+  // ---------- Hall, redrawn from the Barcelona 2026 floor plan ----------
+  var svg = $("hall"), seats = [], marks = [], r12, r24, wallTix;
+  function grid(x0, y0, cols, rows, cls) {
+    for (var r = 0; r < rows; r++) for (var c = 0; c < cols; c++) el("rect", { x: x0 + c * 10, y: y0 + r * 10, width: 8, height: 8, "class": "cell " + cls }, svg);
+  }
+  function zone(x, y, w, h, label, cls) {
+    el("rect", { x: x, y: y, width: w, height: h, "class": "zonebox" + (cls ? " " + cls : "") }, svg);
+    if (label) el("text", { x: x + w / 2, y: y + h / 2 + 5, "class": "zm" }, svg, label);
+  }
+  function hot(x, y, w, h, name, go) {
+    var r = el("rect", { x: x, y: y, width: w, height: h, "class": "hot" + (go ? " go" : ""), "data-tip": name }, svg);
+    if (go) r.addEventListener("click", function () { setStep(go); });
+  }
+  function build() {
+    el("path", { d: "M30,52 H970 V540 L840,630 H160 L30,540 Z", "class": "outline" }, svg);
+    var g = el("g", { transform: "translate(905,585) rotate(-34.7)" }, svg);
+    el("rect", { x: -70, y: -17, width: 140, height: 34, fill: "#ef7d00" }, g);
+    el("text", { x: 0, y: 6, "text-anchor": "middle", "font-size": 18, "font-weight": 700, fill: "#1e3043" }, g, "ENTRANCE");
+
+    el("text", { x: 60, y: 76, "class": "zl" }, svg, "SIDE EVENTS");
+    grid(60, 86, 16, 8, "s"); grid(232, 86, 16, 8, "s");
+    el("text", { x: 715, y: 76, "class": "zl" }, svg, "MAIN EVENT");
+   [[715, 86], [840, 86], [715, 292], [840, 292]].forEach(function (p) { grid(p[0], p[1], 11, 19, "m"); });
+      zone(420, 86, 240, 82, "", "wallbox");
+    el("text", { x: 420, y: 76, "class": "zl" }, svg, "PRIZE WALL");
+    wallTix = el("text", { x: 540, y: 130, "class": "walltix" }, svg);
+
+    zone(60, 250, 170, 110, "");
+    el("text", { x: 145, y: 276, "class": "zm" }, svg, "Stream stage");
+    [95, 129, 163, 197].forEach(function (x) { el("rect", { x: x - 12, y: 292, width: 24, height: 24, "class": "cell" }, svg); });
+    zone(250, 250, 150, 60, "Free Play Area");
+    zone(250, 322, 150, 56, "Unboxing booth");
+    zone(60, 380, 170, 50, "Cosplay Meet & Greet");
+    zone(250, 392, 310, 80, "Artist Alley and Vendor Village ");
+    zone(300, 560, 200, 40, "Graffiti wall");
+
+    // route: entrance to a side-event table, then tickets to the wall
+    r12 = el("path", { d: "M806 556 L575 520 L575 215 L225 215 L225 147", "class": "route", pathLength: 1 }, svg);
+    r24 = el("path", { d: "M247 125 H420", "class": "route", pathLength: 1 }, svg);
+
+    // stop 3: one pod of 8, magnified
+    var ins = el("g", { "class": "inset" }, svg);
+    el("rect", { x: 350, y: 124, width: 42, height: 42, "class": "zoom" }, ins);
+    el("path", { d: "M350 166 L412 262 M392 166 L556 262", "class": "zoom" }, ins);
+    el("rect", { x: 412, y: 262, width: 144, height: 122, "class": "insetbox", "data-tip": "One pod of 8 players. A filled circle is a player who earns 1+ tickets." }, ins);
+    [316, 348].forEach(function (y) { [436, 468, 500, 532].forEach(function (x) { seats.push(el("circle", { cx: x, cy: y, r: 12, "class": "seat" }, ins)); }); });
+    el("text", { x: 484, y: 377, "class": "insetlbl" }, ins, "ONE POD OF 8");
+
+    hot(56, 56, 340, 112, "Side events and on-demand play tables. Click to go to stop 2.", 2);
+      hot(420, 86, 240, 82, "Prize wall & official merch. Tickets are spent here. Click to go to step 4 of the ticket journey.", 4);
+    hot(250, 322, 150, 56, "Live pack ripping booth.");
+    hot(60, 380, 170, 50, "Cosplay meet n' greet. The home for Danielle's future Poro cosplay.");
+    hot(250, 392, 310, 80, "Stuttgart recently hosted an Artist Alley with local creators. Damian mentioned it exceeded expectations!");
+    hot(300, 560, 200, 40, "Graffiti wall/Danielle's favorite spot.");
+    hot(820, 540, 150, 90, "Entrance. Click to go to step 1 the ticket journey!", 1);
+
+    [[806, 556], [225, 125], [412, 262], [660, 86]].forEach(function (p, i) {
+      var m = el("g", { "class": "mk", role: "button", tabindex: 0, "aria-label": "Stop " + (i + 1) + ", " + STOPS[i].n, "data-tip": "Stop " + (i + 1) + ": " + STOPS[i].n + ". Click to jump here." }, svg);
+      el("circle", { cx: p[0], cy: p[1], r: 20 }, m);
+      el("text", { x: p[0], y: p[1] + 7 }, m, String(i + 1));
+      el("circle", { cx: p[0], cy: p[1], r: 38, "class": "hit" }, m);
+      m.addEventListener("click", function () { setStep(i + 1); });
+      m.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setStep(i + 1); } });
+      marks.push(m);
+    });
+  }
+
+  // ---------- Panel ----------
+  function dots(n) {
+    var s = '<div class="dots" aria-hidden="true">';
+    for (var i = 0; i < 8; i++) s += '<i' + (i < n ? ' class="on"' : "") + "></i>";
+    return s + "</div>";
+  }
+  function scale(f) {
+    var x = function (p) { return 24 + p / 40 * 352; };
+    var s = '<svg class="scale" viewBox="0 0 400 92" role="img" aria-label="Prize wall prices from 1 to 40 tickets, with this event’s best record at ' + f.top + " and average at " + f.avg + '">';
+    s += '<line x1="24" x2="376" y1="60" y2="60" stroke="rgba(255,255,255,.35)" stroke-width="2"/>';
+    PRICES.forEach(function (p) {
+      s += '<line x1="' + x(p[0]) + '" x2="' + x(p[0]) + '" y1="54" y2="66" stroke="#a8c2cf" stroke-width="2"/>';
+      s += '<text x="' + x(p[0]) + '" y="82" text-anchor="middle">' + p[0] + "</text>";
+    });
+    var bx = x(f.top), ax = x(f.avg), right = bx > 200;
+    s += '<line x1="' + bx + '" x2="' + bx + '" y1="18" y2="52" stroke="#ef7d00" stroke-width="2"/>';
+    s += '<path d="M' + (bx - 6) + " 50 L" + (bx + 6) + " 50 L" + bx + ' 60 Z" fill="#ef7d00"/>';
+    s += '<text class="pin" x="' + (bx + (right ? -6 : 6)) + '" y="16" text-anchor="' + (right ? "end" : "start") + '">Best record: ' + f.top + "</text>";
+    s += '<line x1="' + ax + '" x2="' + ax + '" y1="36" y2="56" stroke="#f9f9f9" stroke-width="1.5"/>';
+    s += '<circle cx="' + ax + '" cy="60" r="5" fill="#f9f9f9"/>';
+    s += '<text class="pin" x="' + (ax + 6) + '" y="36">Average: ' + f.avg + "\u00b9</text>";
+    return s + "</svg>";
+  }
+  function ovRow(id, who, fee, n) {
+    var f = F.filter(function (x) { return x.id === id; })[0];
+    return '<div class="ovrow"' + tip(MATH[id]) + '><span class="who"><b>' + who + "</b><small>" + fee + "</small></span>" + dots(f.seats) + '<span class="n">' + n + "<sup><a href=\"#n1\">1</a></sup></span></div>";
+  }
+  function viz(f) {
+    if (step === 0) return "";
+    if (step === 1) {
+      return '<div class="big"' + tip("Published entry fee. It also buys the packs the player drafts or builds with.") + '>' + f.fee + '</div><div class="unit">entry fee</div><div class="row">' +
+        (f.tier ? '<span class="badge' + (f.tier === "Competitive" ? " comp" : "") + '"' + tip("Every side event carries a Casual or Competitive label on the published schedule. Barcelona, Los Angeles and Stuttgart all used them.") + '>' + f.tier + "</span>" : "") +
+        (f.extra ? "<span" + tip(f.extra.indexOf("cap") > 0 ? "The most entrants the published schedule allows for one flight of this event." : "Stuttgart put on-demand pods on a synchronized clock, with draft firing at :00, :20 and :40. The published reason was that ad-hoc firing had been clustering crowds and confusing the schedule.") + ">" + f.extra + "</span>" : "") + "</div>";
+    }
+    if (step === 2) {
+      var p = '<div class="pips"' + tip("Each box is one round. Three bars mean best of three. One bar means a single game, or a match type the schedule doesn't state.") + '>';
+      for (var i = 0; i < f.rounds; i++) p += "<i>" + (f.bo === 3 ? "<b></b><b></b><b></b>" : "<b></b>") + "</i>";
+      return p + '</div><div class="unit">' + f.rounds + " rounds" + (f.bo === 3 ? ", best of three" : f.bo === 1 ? ", single games" : "") + ". Each box is one round.</div>";
+    }
+    if (step === 3) {
+      return '<div class="big"' + tip(MATH[f.id]) + '>' + f.per8 + '<sup><a href="#n1">1</a></sup></div><div class="unit">tickets per 8 players</div>' +
+        '<div' + tip("A filled dot is a player who earns at least one ticket. " + MATH[f.id]) + '>' + dots(f.seats) + '</div>' +
+        '<div class="unit">' + f.earn + "% earn tickets<sup><a href=\"#n2\">2</a></sup>. Pays " + f.pays + ".</div>";
+    }
+    return '<div' + tip("Prize wall prices on one line, from 1 to 40 tickets. The orange pin is the most one player can win in this event. The white dot is the average payout per player, modeled.") + '>' + scale(f) + '</div><div class="unit">1 pack, 3 sleeves, 5 set playmat, 12 Regional playmat, 24 booster box, 40 Plated Legend. Prices from the Stuttgart list. The Plated Legend cost 40 at all three events.</div>';
+  }
+  function render() {
+    var f = fmt(), s = step ? STOPS[step - 1] : OV;
+    svg.setAttribute("data-step", step);
+    r12.classList.toggle("on", step >= 2);
+    r24.classList.toggle("on", step >= 4);
+    seats.forEach(function (c, i) { c.classList.toggle("on", i < f.seats); });
+    wallTix.textContent = "+" + f.per8 + "\u00b9 tickets";
+    marks.forEach(function (m, i) { m.classList.toggle("now", i + 1 === step); m.classList.toggle("done", i + 1 < step); });
+    document.querySelectorAll(".tab").forEach(function (b) { b.setAttribute("aria-pressed", String(+b.dataset.s === step)); });
+    document.querySelectorAll(".chip").forEach(function (b) { b.setAttribute("aria-pressed", String(step > 0 && b.dataset.f === cur)); });
+    $("p-ev").textContent = step ? f.ev + " / " + f.name : "Barcelona, Los Angeles, and Stuttgart";
+    $("p-title").textContent = step ? step + ". " + s.n : s.n;
+    $("p-text").textContent = s.t;
+    $("p-gap").textContent = s.gap;
+    $("p-viz").innerHTML = viz(f);
+    $("p-viz").style.display = step === 0 ? "none" : "";    
+    $("next").textContent = step === 0 ? "Walk the four stops" : step < 4 ? "Next: " + STOPS[step].n : "Follow a different event";  }
+  function setStep(n) { step = n; render(); }
+
+  // chips
+  var groups = {}, order = [];
+  F.forEach(function (f) { if (!groups[f.group]) { groups[f.group] = []; order.push(f.group); } groups[f.group].push(f); });
+  $("chips").innerHTML = order.map(function (g) {
+    return '<div class="chipgroup"><small>' + g + "</small><div>" + groups[g].map(function (f) {
+      return '<button type="button" class="chip" data-f="' + f.id + '"' + tip(f.ev + " " + f.name + ". " + f.fee + ", " + f.rounds + " rounds. Pays " + f.pays + ".") + '>' + f.name + "</button>";
+    }).join("") + "</div></div>";
+  }).join("");
+  $("chips").addEventListener("click", function (e) { var b = e.target.closest(".chip"); if (!b) return; cur = b.dataset.f; if (step === 0) step = 1; render(); });
+  document.querySelectorAll(".tab").forEach(function (b) { b.addEventListener("click", function () { setStep(+b.dataset.s); }); });
+  $("next").addEventListener("click", function () {
+    if (step < 4) { setStep(step + 1); return; }
+    var ids = F.map(function (f) { return f.id; });
+    cur = ids[(ids.indexOf(cur) + 1) % ids.length];
+    setStep(1);
+  });
+
+  build();
+  render();
+
+  // ---------- Explanations on hover and tap ----------
+  document.querySelectorAll(".pods .pod").forEach(function (n, i) { n.setAttribute("data-tip", MATH[F[i].id] + " Modeled: every match has a winner, with no draws or drops."); });
+
+  document.querySelectorAll(".tab").forEach(function (b, i) { b.setAttribute("data-tip", STOPS[i].t); });
+
+  var tipEl = document.createElement("div");
+  tipEl.className = "tip"; tipEl.setAttribute("role", "tooltip"); tipEl.hidden = true;
+  document.body.appendChild(tipEl);
+  function showTip(text, x, y) {
+    tipEl.textContent = text; tipEl.hidden = false;
+    var w = tipEl.offsetWidth, h = tipEl.offsetHeight, vw = document.documentElement.clientWidth, vh = window.innerHeight;
+    var top = y + 18; if (top + h > vh - 12) top = Math.max(12, y - h - 14);
+    tipEl.style.left = Math.min(vw - w - 12, Math.max(12, x + 14)) + "px";
+    tipEl.style.top = top + "px";
+  }
+  function hideTip() { tipEl.hidden = true; }
+  function tipTarget(e) { return e.target.closest ? e.target.closest("[data-tip]") : null; }
+  document.addEventListener("pointermove", function (e) {
+    if (e.pointerType !== "mouse") return;
+    var t = tipTarget(e);
+    if (t) showTip(t.getAttribute("data-tip"), e.clientX, e.clientY); else hideTip();
+  });
+  document.addEventListener("click", function (e) {
+    var t = tipTarget(e);
+    // a tap on a control does its job; a tap on anything else explains it
+    if (!t || t.closest("button, .mk, .go")) { hideTip(); return; }
+    showTip(t.getAttribute("data-tip"), e.clientX, e.clientY);
+  });
+  window.addEventListener("scroll", hideTip, { passive: true });
+})();
+</script>
+</body>
+</html>
